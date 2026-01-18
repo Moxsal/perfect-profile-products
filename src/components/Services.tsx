@@ -14,6 +14,11 @@ import lighting2 from "@/assets/lighting-2.jpeg";
 import lighting3 from "@/assets/lighting-3.jpeg";
 import lighting4 from "@/assets/lighting-4.jpeg";
 import lighting5 from "@/assets/lighting-5.jpeg";
+import lighting6 from "@/assets/lighting-6.jpeg";
+import lighting7 from "@/assets/lighting-7.jpeg";
+import lighting8 from "@/assets/lighting-8.jpeg";
+import lighting9 from "@/assets/lighting-9.jpeg";
+import lighting10 from "@/assets/lighting-10.jpeg";
 
 const Services = () => {
   const services = [
@@ -85,13 +90,13 @@ const Services = () => {
     },
     {
       title: "Lighting Systems",
-      description: "Complete lighting system design and installation for residential and commercial spaces. We integrate modern LED solutions, ambient lighting, and smart controls to create energy-efficient systems that enhance comfort and architectural features.",
-      images: [lighting3, lighting4, lighting5, lighting1, lighting2],
+      description: "Complete lighting system design and installation for residential and commercial spaces. From contemporary LED ceiling fixtures and elegant chandeliers to outdoor wall sconces and accent lighting, we provide comprehensive illumination solutions. Our work includes modern geometric ceiling lights, stylish pendant fixtures, energy-efficient outdoor lighting, and decorative indoor/outdoor wall lights—all designed to enhance aesthetics, improve functionality, and reduce energy costs.",
+      images: [lighting6, lighting10, lighting7, lighting8, lighting9, lighting3, lighting4, lighting5, lighting1, lighting2],
       features: [
-        "LED & chandelier installations",
-        "Ambient and task lighting design",
-        "Energy-efficient solutions",
-        "Smart lighting controls integration",
+        "Modern LED ceiling & pendant installations",
+        "Indoor & outdoor wall lighting systems",
+        "Ambient, task & accent lighting design",
+        "Smart controls & energy-efficient solutions",
       ],
     },
     {
