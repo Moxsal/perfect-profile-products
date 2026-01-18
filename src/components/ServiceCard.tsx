@@ -1,16 +1,29 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 interface ServiceCardProps {
   title: string;
   description: string;
-  image: string;
+  images: string[];
   features: string[];
   index: number;
 }
 
-const ServiceCard = ({ title, description, image, features, index }: ServiceCardProps) => {
+const ServiceCard = ({ title, description, images, features, index }: ServiceCardProps) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const nextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 40 }}
@@ -19,14 +32,53 @@ const ServiceCard = ({ title, description, image, features, index }: ServiceCard
       viewport={{ once: true, margin: "-50px" }}
       className="group bg-card rounded-xl overflow-hidden shadow-card hover:shadow-elevated transition-all duration-500 border border-border"
     >
-      {/* Image */}
+      {/* Image Gallery */}
       <div className="relative h-56 overflow-hidden">
         <img
-          src={image}
-          alt={title}
+          src={images[currentImageIndex]}
+          alt={`${title} - Project ${currentImageIndex + 1}`}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        
+        {/* Navigation arrows - only show if multiple images */}
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={prevImage}
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-background"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-5 h-5 text-foreground" />
+            </button>
+            <button
+              onClick={nextImage}
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-background"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-5 h-5 text-foreground" />
+            </button>
+            
+            {/* Image indicators */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+              {images.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentImageIndex(idx);
+                  }}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    idx === currentImageIndex 
+                      ? 'bg-gold w-4' 
+                      : 'bg-background/60 hover:bg-background/80'
+                  }`}
+                  aria-label={`View image ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
       {/* Content */}
