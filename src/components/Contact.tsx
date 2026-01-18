@@ -13,8 +13,9 @@ const Contact = () => {
     },
     {
       icon: Phone,
-      title: "Phone Number",
-      details: ["+234 XXX XXX XXXX", "+234 XXX XXX XXXX"],
+      title: "WhatsApp",
+      details: ["+233 24 038 4380"],
+      link: "https://wa.me/233240384380",
     },
     {
       icon: Mail,
@@ -60,26 +61,35 @@ const Contact = () => {
             viewport={{ once: true }}
             className="lg:col-span-2 space-y-6"
           >
-            {contactInfo.map((item, index) => (
-              <div
-                key={item.title}
-                className="flex gap-4 p-4 bg-card rounded-xl border border-border"
-              >
-                <div className="flex-shrink-0 w-12 h-12 bg-gold/10 rounded-lg flex items-center justify-center">
-                  <item.icon className="w-6 h-6 text-gold" />
+            {contactInfo.map((item, index) => {
+              const content = (
+                <div
+                  className={`flex gap-4 p-4 bg-card rounded-xl border border-border ${item.link ? 'hover:border-gold/50 cursor-pointer transition-colors' : ''}`}
+                >
+                  <div className="flex-shrink-0 w-12 h-12 bg-gold/10 rounded-lg flex items-center justify-center">
+                    <item.icon className="w-6 h-6 text-gold" />
+                  </div>
+                  <div>
+                    <h4 className="font-display font-semibold text-foreground mb-1">
+                      {item.title}
+                    </h4>
+                    {item.details.map((detail, idx) => (
+                      <p key={idx} className="text-sm text-muted-foreground font-body">
+                        {detail}
+                      </p>
+                    ))}
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-display font-semibold text-foreground mb-1">
-                    {item.title}
-                  </h4>
-                  {item.details.map((detail, idx) => (
-                    <p key={idx} className="text-sm text-muted-foreground font-body">
-                      {detail}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            ))}
+              );
+              
+              return item.link ? (
+                <a key={item.title} href={item.link} target="_blank" rel="noopener noreferrer">
+                  {content}
+                </a>
+              ) : (
+                <div key={item.title}>{content}</div>
+              );
+            })}
           </motion.div>
 
           {/* Contact form */}
