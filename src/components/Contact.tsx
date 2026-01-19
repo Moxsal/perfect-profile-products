@@ -20,7 +20,8 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email Address",
-      details: ["info@example.com", "projects@example.com"],
+      details: ["dasghlimited@gmail.com"],
+      link: "mailto:dasghlimited@gmail.com",
     },
     {
       icon: Clock,
